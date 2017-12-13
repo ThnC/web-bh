@@ -1,5 +1,6 @@
-<%@page import="model.Product"%>
 <%@page import="dao.ProductDAOImpl"%>
+<%@page import="dao.ProductDAO"%>
+<%@page import="model.Product"%>
 <%@page import="dao.CategoryDAOImpl"%>
 <%@page import="model.Category"%>
 <html lang="en">
@@ -24,9 +25,9 @@
         <link href="../admin/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
         <!-- END GLOBAL MANDATORY STYLES -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <link href="../admin/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
-        <link href="../admin/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="../admin/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css" rel="stylesheet" type="text/css" />
+       	<link href="../admin/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="../admin/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN THEME GLOBAL STYLES -->
         <link href="../admin/assets/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
@@ -52,6 +53,14 @@
                 ProductDAOImpl pd = new ProductDAOImpl();
             	p = pd.getProduct_detail(product_id);
             }
+            String category_id = "";
+            Category c = null;
+            if(request.getParameter("category_id")!=null){
+            	category_id = request.getParameter("category_id");
+            	CategoryDAOImpl cy = new CategoryDAOImpl();
+
+            }
+            
         %>
 
 	<!-- BEGIN CONTAINER -->
@@ -74,7 +83,7 @@
                         	<form role="form" action="/WebBH/ManagerProductServlet" method="post">
                             	<div class="form-group">
                                		<label class="control-label">Product name</label>
-                                    <input type="text" placeholder="A Can of Tuna" class="form-control" name="product_name"><%=error%>
+                                    <input type="text" value="<%= p.getProduct_name() %>" placeholder="A Can of Tuna" class="form-control" name="product_name"><%=error%>
                                 </div>
                                	
                                 <div class="form-group mt-repeater">
@@ -124,16 +133,16 @@
                               	
                               	<div class="form-group">
                                     	<label class="control-label" >Qty</label>
-                                        <input type="text" placeholder="3" class="form-control" style="width: 100dx;" name="product_quantity"><%=error%>
+                                        <input type="text" value="<%= p.getProduct_quantity() %>"  class="form-control" style="width: 100dx;" name="product_quantity"><%=error%>
                                 </div>
                                                 
                               	<div class="form-group">
                                 	<label class="control-label">Product Description</label>
-                                    	<textarea class="form-control" rows="3" placeholder="It's delicious!!" name="product_description"><%=error%></textarea>
+                                    	<textarea class="form-control" row="3"  value="<%= p.getProduct_description() %>"  name="product_description"><%=error%></textarea>
                                 </div>
                                 <div class="form-group">
                                 	<label class="control-label">Price</label>
-                                	<input type="text" placeholder="$3.99" class="form-control" name="pro_price"><%=error%>
+                                	<input type="text"  value="<%= p.getProduct_price() %>" class="form-control" name="pro_price"><%=error%>
                                 </div>
                                 <div class="margin-top-10">
                                 	<input type="hidden" name="command" value="insert">
@@ -180,7 +189,7 @@
         <!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="../admin/assets/global/scripts/app.min.js" type="text/javascript"></script>
         <!-- END THEME GLOBAL SCRIPTS -->
-      	<!-- BEGIN PAGE LEVEL SCRIPTS -->
+        <!-- BEGIN PAGE LEVEL SCRIPTS -->
         <script src="../admin/assets/pages/scripts/components-select2.min.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL SCRIPTS -->
         <!-- BEGIN THEME LAYOUT SCRIPTS -->

@@ -95,7 +95,7 @@
                                              		</button>
                         							<ul class="dropdown-menu" role="menu">
                                                 		<li>	
-                                                    		<a href="../admin/update_product.jsp?command=update&product_id=<%=pro.getProduct_id()%>">
+                                                    		<a href="../admin/update_product.jsp?product_id=<%=pro.getProduct_id()%>">
                                            	        		<i class="icon-user"></i> Update </a>
                                             	        </li>
                                             	        <li>
